@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseBook — Dashboard</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="index.html"
+                onclick="return confirm('Go back to the setup page?');">
+                <img src="images/logo.png" class="brand-logo-img" alt="ExpenseBook Logo">
+                Expense<span class="text-brand">Book</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <div class="text-end">
+                    <small class="text-secondary">
+                        Welcome,
+                    </small>
+                    <div class="fw-semibold" id="navName">User</div>
+                </div>
+                <div class="avatar" id="navAvatar">A</div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+    <div class="container py-4">
+        <!-- Alert -->
+        <div id="alertBox"></div>
+
+        <!-- ================= SUMMARY ================= -->
+        <div class="row g-4 mb-4">
+
+            <!-- Salary -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card card shadow-sm h-100">
+                    <div class="card-body">
+                        <small class="text-secondary text-uppercase">Monthly Salary</small>
+                        <h3 class="fw-bold mt-2" id="cardSalary">₹0</h3>
+                        <small class="text-secondary">Credits on<span id="cardCreditDate">—</span></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card card shadow-sm h-100">
+                    <div class="card-body">
+                        <small class="text-secondary text-uppercase">Total Expense</small>
+                        <h3 class="fw-bold text-danger mt-2" id="cardExpense">₹0</h3>
+                        <small class="text-secondary">This Month</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Income -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card card shadow-sm h-100">
+                    <div class="card-body">
+                        <small class="text-secondary text-uppercase">Extra Income</small>
+                        <h3 class="fw-bold text-success mt-2" id="cardIncome">₹0</h3>
+                        <small class="text-secondary">Additional Earnings</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance -->
+            <div class="col-lg-3 col-md-6">
+                <div class="dashboard-card card shadow-sm h-100">
+                    <div class="card-body">
+                        <small class="text-secondary text-uppercase">Remaining Balance</small>
+                        <h3 class="fw-bold" id="cardBalance"> ₹0 </h3>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" id="progressBar" style="width:0%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= CONTENT ================= -->
+        <div class="row g-4">
+
+            <!-- Input COLUMN -->
+            <div class="col-lg-4">
+                <div class="add-card card shadow-sm">
+                    <div class="card-body">
+
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs mb-4" id="transactionTabs" role="tablist">
+                            <li class="nav-item flex-fill" role="presentation">
+                                <button class="nav-link active w-100" id="expense-tab" data-bs-toggle="tab"
+                                    data-bs-target="#expensePane" type="button">
+                                    <i class="fa-solid fa-receipt"></i> Expense
+                                </button>
+                            </li>
+                            <li class="nav-item flex-fill" role="presentation">
+                                <button class="nav-link w-100" id="income-tab" data-bs-toggle="tab"
+                                    data-bs-target="#incomePane" type="button">
+                                    <i class="fa-solid fa-hand-holding-dollar"></i> Income
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+
+                            <!-- ================================== Expense Form =============================== -->
+                            <div class="tab-pane fade show active" id="expensePane">
+                                <form id="expenseForm" novalidate>
+                                    <div class="mb-3">
+                                        <label class="form-label">Description</label>
+                                        <input type="text" class="form-control" id="expName" maxlength="60"
+                                            placeholder="e.g. Swiggy Order" required>
+                                        <div class="invalid-feedback">Enter a description.</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">
+                                            Amount
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="expenseSymbol">₹</span>
+                                            <input type="number" class="form-control" id="expAmount" min="1" required>
+                                            <div class="invalid-feedback">Enter a valid amount.</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Category</label>
+                                        <select class="form-select" id="expCategory">
+                                            <option>Food</option>
+                                            <option>Transport</option>
+                                            <option>Shopping</option>
+                                            <option>Bills</option>
+                                            <option>Health</option>
+                                            <option>Education</option>
+                                            <option>Entertainment</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Date</label>
+                                            <input type="date" class="form-control" id="expDate" required>
+                                            <div class="invalid-feedback">Select a date.</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Time</label>
+                                            <input type="time" class="form-control" id="expTime" required>
+                                            <div class="invalid-feedback">Select time.</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary w-100" type="submit">Add Expense</button>
+                                </form>
+                            </div>
+
+                            <!-- ========== Income Form ============== -->
+                            <div class="tab-pane fade" id="incomePane">
+                                <form id="incomeForm" novalidate>
+                                    <div class="mb-3">
+                                        <label class="form-label">Description</label>
+                                        <input type="text" class="form-control" id="incomeName" maxlength="60"
+                                            placeholder="e.g. Freelancing" required>
+                                        <div class="invalid-feedback">Enter a description.</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Amount</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="incomeSymbol">₹</span>
+                                            <input type="number" class="form-control" id="incomeAmount" min="1"
+                                                required>
+                                            <div class="invalid-feedback">Enter a valid amount.</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Source</label>
+                                        <select class="form-select" id="incomeCategory">
+                                            <option>Salary</option>
+                                            <option>Freelancing</option>
+                                            <option>Bonus</option>
+                                            <option>Gift</option>
+                                            <option>Interest</option>
+                                            <option>Refund</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Date</label>
+                                            <input type="date" class="form-control" id="incomeDate" required>
+                                            <div class="invalid-feedback">Select a date.</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Time</label>
+                                            <input type="time" class="form-control" id="incomeTime" required>
+                                            <div class="invalid-feedback">Select time.</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success w-100" type="submit">Add Income</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================ All Transactions COLUMN ================= -->
+            <div class="col-lg-8">
+                <div class="list-card card shadow-sm">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">All Transactions</h5>
+                        <span class="badge bg-brand rounded-pill" id="transactionCount"> 0 Entries</span>
+                    </div>
+                    <div class="transaction-body" id="transactionContainer">
+                        <!-- Empty State -->
+                        <div class="empty-state" id="emptyState">
+                            <div class="display-4 mb-3"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                            <h5 class="fw-bold">No Transactions Yet</h5>
+                            <p class="text-secondary mb-0">Start by adding your first expense or income.</p>
+                        </div>
+                        <!-- Transactions will be inserted here -->
+                        <div id="transactionList">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

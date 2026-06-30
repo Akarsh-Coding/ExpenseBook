@@ -1,0 +1,198 @@
+:root {
+    --brand: #4338ca;
+    --brand-dark: #3730a3;
+    --brand-light: #eef2ff;
+
+    --success: #059669;
+    --danger: #dc2626;
+    --warning: #d97706;
+
+    --text: #1e1b4b;
+    --text-soft: #6b7280;
+
+    --bg: #f7f8ff;
+    --radius: 14px;
+}
+
+/* General */
+
+body {
+    font-family: "Inter", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Navbar */
+
+.brand-logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.navbar-brand {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-soft);
+}
+
+.text-brand {
+    color: var(--brand);
+}
+
+.bg-brand {
+    background-color: var(--brand);
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cards */
+
+.card h3,
+.card-value {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+}
+
+.card-value {
+    font-size: 2rem;
+}
+
+.dashboard-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .08) !important;
+}
+
+/* Bootstrap Overrides */
+
+.progress-bar {
+    background-color: var(--brand);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--brand) !important;
+    border-color: var(--brand) !important;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-dark);
+    border-color: var(--brand-dark);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 .2rem rgba(67, 56, 202, .15);
+}
+
+/* Add Transaction */
+
+.add-card .card-body {
+    padding: 24px;
+}
+
+/* Transaction List */
+
+.transaction-body {
+    height: 550px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.transaction-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.transaction-body::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+.transaction-body::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+.transaction-row {
+    transition: background-color .15s ease;
+}
+
+.transaction-row:hover {
+    background: #fafbff;
+}
+
+.transaction-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.expense-icon {
+    background: #fef2f2;
+}
+
+.income-icon {
+    background: #ecfdf5;
+}
+
+/* Empty State */
+
+.empty-state {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.empty-state .display-4 {
+    margin-bottom: 16px;
+}
+
+.empty-state h5 {
+    font-weight: 700;
+}
+
+.empty-state p {
+    color: var(--text-soft);
+}
+
+/* Responsive */
+
+@media (max-width: 992px) {
+    .transaction-body {
+        height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-value {
+        font-size: 1.7rem;
+    }
+
+    .transaction-body {
+        height: 400px;
+    }
+}
